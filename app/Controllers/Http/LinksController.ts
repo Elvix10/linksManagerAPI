@@ -49,7 +49,7 @@ export default class LinksController {
   public async update({ params, request }: HttpContextContract) {
     try {
       const link = await Link.find(params.id);
-      link.url = request.input("url");
+      link.url = request.input("url")
       link.title = request.input("title");
       link.description = request.input("description");
 
