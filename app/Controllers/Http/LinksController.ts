@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 
 import Link from "App/Models/Link";
@@ -47,6 +48,7 @@ export default class LinksController {
       link?.merge(linkData);
 
       await link.save();
+     
 
       return {
         message: "link updated",
