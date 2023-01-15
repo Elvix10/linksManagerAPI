@@ -40,14 +40,13 @@ export default class LinksController {
     }
   }
 
-  public async update({ params}: HttpContextContract) {
+  public async update({ params, request }: HttpContextContract) {
     try {
+      const linkData = request.only(["url", "title", "description"]);
       const link = await Link.find(params.id);
-      //link.url = request.input("url")
-      //link.title = request.input("title");
-      //link.description = request.input("description");
+      link?.merge(linkData);
 
-      //await link.save();
+      await link.save();
 
       return {
         message: "link updated",
@@ -73,14 +72,14 @@ export default class LinksController {
     const page = await browser.newPage();
     await page.goto("https://devgo.com.br/");
 
-/*     const links = await page.evaluate(() =>
-       Array.from(document.querySelectorAll(".blog-article-card"), (e) => ({
+    const links = await page.evaluate(() =>
+      Array.from(document.querySelectorAll(".blog-article-card"), (e) => ({
         title: e.querySelector("h1 a").innerText,
         link: e.querySelector("a").href,
-      })) 
-    ); */
+      }))
+    );
 
     await browser.close();
-    return "";
+    return links;
   }
 }
