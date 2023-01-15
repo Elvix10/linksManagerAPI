@@ -81,7 +81,7 @@ export default class LinksController {
       }))
     );
 
-    await browser.close();
     return links;
+    await browser.close();
   }
 }
